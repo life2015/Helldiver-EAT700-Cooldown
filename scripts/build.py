@@ -11,7 +11,6 @@ from archive import resource_hash, make_archive, TYPE, ARCHIVE
 MODULE='mods/retrox/eat700_cooldown'
 IMPL=MODULE+'_impl'
 DISPLAY_NAME='火次抛减CD到标准次抛'
-DISPLAY_NAME='火次抛减CD到标准次抛'
 CALLBACK='core/wwise/lua/wwise_flow_callbacks'
 LOADER_SHA={
     'v14':'7FA8AF328AC2C98F68DD5946D94444315DD61B2B3504B0788301700CC9C023B2',
