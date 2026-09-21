@@ -1,0 +1,28 @@
+{
+  "exe_sha256": "A09FF52663E73B94FB0CAC0DCB5BA84FFD10ECF44F74A8921AC66AF923988CC3",
+  "dll_sha256": "CC75948D90FDFDE259DCB519E9933DB7FFA3CCB281CE4FB89E6B1B011557470C",
+  "cooldown": {
+    "slot_rva": 44880448,
+    "record_id": 38,
+    "record_size": 400,
+    "offset": 104,
+    "identity_hex": "2600000047dd196cc8ab98f3",
+    "name_offset": 24,
+    "name": "nui_weapon_support_expendable_napalm_launcher_name",
+    "before": "00000c43",
+    "after": "00008c42",
+    "original_base_seconds": 140,
+    "base_seconds": 70,
+    "effective_seconds": 59.849998474121094,
+    "display_seconds": 60,
+    "upgrade_multipliers": [
+      0.949999988079071,
+      0.8999999761581421
+    ]
+  },
+  "signatures": {
+    "0xf51d50": "85c97508488d0525b2b701c38bc1488d0dabb3b701488b04",
+    "0x86f873": "f30f1043684c8d8424a00000008bd6f30f118424a0000000"
+  },
+  "version": "0.1.1"
+}

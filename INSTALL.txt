@@ -1,0 +1,30 @@
+EAT-700 Cooldown 0.1.1
+
+只改火焰次抛战备 CD：140 秒 -> 70 秒。
+当前 5% 与 10% 舰船升级后约 59.85 秒，菜单取整显示 60 秒。
+保留原版火焰弹头及全部武器功能。常规 EAT-17 不变。
+
+退出游戏后，通过 Arsenal / HD2MM 导入并启用 ZIP。
+选择一个渠道：
+- v14 内置加载器：内含完整发布版 Bingus Shared Loader v14 启动代码，先运行加载器再启动冷却模块。
+  本包必须赢得 core/wwise/lua/wwise_flow_callbacks 的资源优先级。
+  Arsenal 默认优先级时把本包放最后；启用首模组优先时放最前。Wwise 资源重叠提示属于预期。
+  多个内置加载器包不能靠排序保证所有私有启动桥都执行；需要同时使用时优先选择各自的 v15 独立插件包。
+- v15 需要额外安装加载器：另行安装官方 Bingus Shared Loader v15 或更新版本。
+  通过明文 HD2-Addon 入口自动发现独立模块；不内置加载器，不替换 Wwise 或 boot，不使用旧兼容别名。
+
+只安装一个渠道，并禁用此模组的其他旧包。不再提供 v12 渠道。
+不要与 EAT-700 空爆版同时启用：两者都会改写同一个 CD 字段。
+从空爆版切换时，应先禁用空爆版再部署此包，然后正常重启游戏。
+
+手动部署可用 scripts/deploy.py install --channel v15（默认也是 v15）。
+脚本在资源重叠时拒绝部署；已有 Wwise 启动包时，请用模组管理器处理 v14 优先级。
+手动复制时，v14 取 data、v15 取 Addon 下三个文件，使用同一个未占用的 patch_N 编号放到游戏 data。
+勿覆盖已有文件；手动复制的文件需自行记录并移除。
+卸载在退出游戏后禁用并重新部署；脚本安装可用 scripts/deploy.py uninstall。
+
+状态日志：%LOCALAPPDATA%\EAT700Cooldown.log。
+v14 启动日志：%LOCALAPPDATA%\EAT700Cooldown-startup.log。
+核对当前 process_id 和 status=active。新一轮呼叫使用新 CD，旧倒计时不变。
+其他舰船升级组合及任务修正会继续影响最终冷却。
+独立版启动与长期实机表现尚待验证；离线测试不能代替实机测试。

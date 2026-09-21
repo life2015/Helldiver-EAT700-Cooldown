@@ -1,0 +1,46 @@
+# Generated archives, extracted fixtures, downloaded loaders and deployment journals
+/build/
+/releases/
+/dist/
+/research/
+/test-fixtures/
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Game binaries, extracted data, compiled Lua and memory dumps
+*.dll
+*.exe
+*.bin
+*.dl_bin
+*.dl_typelib
+*.luac
+*.dmp
+*.patch_*
+*.zip
+
+# Local debug scripts and runtime output
+/scripts/live_trial.py
+*.log
+*.tmp
+*.bak
+
+# Local credentials and editor/OS files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
