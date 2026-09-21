@@ -10,6 +10,8 @@ from archive import resource_hash, make_archive, TYPE, ARCHIVE
 
 MODULE='mods/retrox/eat700_cooldown'
 IMPL=MODULE+'_impl'
+DISPLAY_NAME='火次抛减CD到标准次抛'
+DISPLAY_NAME='火次抛减CD到标准次抛'
 CALLBACK='core/wwise/lua/wwise_flow_callbacks'
 LOADER_SHA={
     'v14':'7FA8AF328AC2C98F68DD5946D94444315DD61B2B3504B0788301700CC9C023B2',
@@ -18,7 +20,7 @@ CALLBACK_SHA='B2E82518373E7EB85315C54B5829F8FD2BB1277D1690E40476354111B1608210'
 
 def package_name(channel,version):
     label={'v14':'内置加载器','v15':'需要额外安装加载器'}[channel]
-    return f'EAT700-Cooldown-{version}-{channel}-{label}.zip'
+    return f'{DISPLAY_NAME}-{version}-{channel}-{label}.zip'
 
 def loader_archive(channel):
     path=ROOT/'build'/f'Bingus-Shared-Loader-{channel}.zip'
@@ -104,15 +106,15 @@ def build():
         description+=('Includes published Bingus Shared Loader v14. This package MUST WIN the Wwise startup conflict. '
                       'Arsenal default priority: put last; first-mod priority: put first.' if channel=='v14' else
                       'Requires separately installed Bingus Shared Loader v15 or newer. Discoverable addon; no Wwise/boot replacement.')
-        report={'version':version,'channel':channel,'source_sha256':sha(text.encode()),'archive_sha256':sha(archive),
+        report={'display_name':DISPLAY_NAME,'version':version,'channel':channel,'source_sha256':sha(text.encode()),'archive_sha256':sha(archive),
                 'resources':resources,'data_directory':directory,'implementation_sha256':sha(code),
                 'tested_loader_zip_sha256':LOADER_SHA[channel],'startup_tests':checks,
                 'profile':profile,'validation':{'cooldown_origin':'Base 70s matches EAT-17 stratagem registry row 145 at offset 104; new cooldown and standalone startup not yet tested in game',
                 'packaged_startup_in_game':False,'multiplayer':False},
                 'bundled_loader':channel=='v14','replaces_wwise':channel=='v14'}
         name=package_name(channel,version)
-        manifest={'Version':1,'Guid':'4d59d3ea-05aa-432b-b124-0e9d6688785a','Name':f'EAT-700 Cooldown {version} {channel}',
-                  'Description':description,'Options':[{'Name':'EAT-700 Cooldown','Description':description,'Include':[directory]}]}
+        manifest={'Version':1,'Guid':'4d59d3ea-05aa-432b-b124-0e9d6688785a','Name':f'{DISPLAY_NAME} {version} {channel}',
+                  'Description':description,'Options':[{'Name':DISPLAY_NAME,'Description':description,'Include':[directory]}]}
         files={directory+'/'+ARCHIVE:archive,directory+'/'+ARCHIVE+'.stream':b'',directory+'/'+ARCHIVE+'.gpu_resources':b'',
                'manifest.json':json.dumps(manifest,indent=2).encode(),'provenance.json':json.dumps(report,indent=2).encode(),
                'THIRD_PARTY.md':(ROOT/'THIRD_PARTY.md').read_bytes(),
