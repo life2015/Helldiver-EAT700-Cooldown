@@ -31,7 +31,7 @@ local function fixture()
         api.writes[#api.writes+1]={p,before,after}
         if api.fail then api.fail=false;error('Simulated failure after write')end
     end
-    return {memory=memory,api=api,raw=raw,state=state,control=controller(api,PROFILE,base,state,factory),replace=replace}
+    return {memory=memory,api=api,raw=raw,state=state,control=controller(api,{cooldown=PROFILE.cooldown},base,state,factory),replace=replace}
 end
 local t=fixture();t.control.poll()
 assert(t.state.status=='active' and #t.api.writes==1 and t.state.base_cooldown==70)

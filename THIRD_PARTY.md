@@ -14,3 +14,5 @@
     `FA766634DFF3F7D1FD9C5C0EBA72B1FBABAD8721710491CAAA4E12A598028CDA`
 
 安装包不包含游戏 DLL、完整游戏配置表或进程内存记录。
+
+- 0.2.0 在原版燃烧弹丸上增加近炸参数；字段结构参考 Filediver projectile_settings.go，并以本机 build 25327279 运行时记录核对。保留原生燃烧爆炸 ID，不移植空爆载荷。

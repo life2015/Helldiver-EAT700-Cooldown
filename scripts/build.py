@@ -10,7 +10,7 @@ from archive import resource_hash, make_archive, TYPE, ARCHIVE
 
 MODULE='mods/retrox/eat700_cooldown'
 IMPL=MODULE+'_impl'
-DISPLAY_NAME='火次抛减CD到标准次抛'
+DISPLAY_NAME='火次抛燃烧弹头增加近炸并且减CD到标准次抛'
 CALLBACK='core/wwise/lua/wwise_flow_callbacks'
 LOADER_SHA={
     'v14':'7FA8AF328AC2C98F68DD5946D94444315DD61B2B3504B0788301700CC9C023B2',
@@ -49,9 +49,9 @@ def lua_value(value):
 def source():
     profile=json.loads((ROOT/'profile.json').read_text())
     parts=[]
-    for name in ('windows','cooldown','controller','install'):
+    for name in ('windows','cooldown','proximity','controller','install'):
         parts.append('local '+name+'=(function()\n'+(ROOT/'src'/f'{name}.lua').read_text()+'\nend)()')
-    parts.append('return install(windows,controller,'+lua_value(profile)+',cooldown)')
+    parts.append('return install(windows,controller,'+lua_value(profile)+',cooldown,proximity)')
     return '\n'.join(parts)
 
 def unpack(archive):
@@ -101,15 +101,16 @@ def build():
         assert resource_hash('boot') not in bodies
         assert resource_hash('mods/codex/gun_calibration') not in bodies
         checks=check_v14(callback,bridge) if channel=='v14' else check_v15(published_archive,callback,entry,code,archive)
-        description='Only EAT-700 cooldown: base 140s -> 70s (same as EAT-17); 59.85s after 5% and 10% upgrades. '
+        description='EAT-700 native incendiary projectile with fixed proximity fuse (2m, 0.2s delay, 1m arming distance), original incendiary payload, no ammo switching. Base cooldown 70s; 59.85s after 5% and 10% upgrades. '
         description+=('Includes published Bingus Shared Loader v14. This package MUST WIN the Wwise startup conflict. '
                       'Arsenal default priority: put last; first-mod priority: put first.' if channel=='v14' else
                       'Requires separately installed Bingus Shared Loader v15 or newer. Discoverable addon; no Wwise/boot replacement.')
         report={'display_name':DISPLAY_NAME,'version':version,'channel':channel,'source_sha256':sha(text.encode()),'archive_sha256':sha(archive),
                 'resources':resources,'data_directory':directory,'implementation_sha256':sha(code),
                 'tested_loader_zip_sha256':LOADER_SHA[channel],'startup_tests':checks,
-                'profile':profile,'validation':{'cooldown_origin':'Base 70s matches EAT-17 stratagem registry row 145 at offset 104; new cooldown and standalone startup not yet tested in game',
-                'packaged_startup_in_game':False,'multiplayer':False},
+                'profile':profile,'validation':{'cooldown_origin':'Base 70s matches EAT-17 stratagem registry row 147 at offset 104.',
+                'user_report':'User confirmed the local incendiary proximity variant complete on 2026-09-23; local deployment uses v15.',
+                'incendiary_proximity_in_game':True,'packaged_startup_in_game':channel=='v15','multiplayer':False},
                 'bundled_loader':channel=='v14','replaces_wwise':channel=='v14'}
         name=package_name(channel,version)
         manifest={'Version':1,'Guid':'4d59d3ea-05aa-432b-b124-0e9d6688785a','Name':f'{DISPLAY_NAME} {version} {channel}',

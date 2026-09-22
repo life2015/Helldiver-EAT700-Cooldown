@@ -1,12 +1,12 @@
 {
-  "exe_sha256": "A09FF52663E73B94FB0CAC0DCB5BA84FFD10ECF44F74A8921AC66AF923988CC3",
-  "dll_sha256": "CC75948D90FDFDE259DCB519E9933DB7FFA3CCB281CE4FB89E6B1B011557470C",
+  "exe_sha256": "D8E23968D1412B07E06785321727D63EDF74E711214D6F6ADEB3BFCA95CA6827",
+  "dll_sha256": "73374BD4E38386BEB9A23BEF480082B67D457EBC77485FBEC5F488B4E95E201F",
   "cooldown": {
-    "slot_rva": 44880448,
-    "record_id": 38,
+    "slot_rva": 58505016,
+    "record_id": 39,
     "record_size": 400,
     "offset": 104,
-    "identity_hex": "2600000047dd196cc8ab98f3",
+    "identity_hex": "2700000047dd196cc8ab98f3",
     "name_offset": 24,
     "name": "nui_weapon_support_expendable_napalm_launcher_name",
     "before": "00000c43",
@@ -21,8 +21,65 @@
     ]
   },
   "signatures": {
-    "0xf51d50": "85c97508488d0525b2b701c38bc1488d0dabb3b701488b04",
-    "0x86f873": "f30f1043684c8d8424a00000008bd6f30f118424a0000000"
+    "0x11f2c30": "85c97508488d0535885d02c38bc1488d0dbb895d02488b04",
+    "0x8797c3": "f30f1043684c8d8424a00000008bd6f30f118424a0000000",
+    "0x11ec7c0": "85c97508488d0595ad5d02c38bc1488d0d9bae5d02488b04c1c3",
+    "0x13ac048": "418b8ff8000000",
+    "0x13acda3": "88841df41100000f93c0f30f118c1df011000088841df5110000",
+    "0x13ad4e1": "4438a405f511000074344889b5e00300000f57c04889b5fc030000c785f80300000000b442f30f7f85e80300004084f60f85a60000004c8be8",
+    "0x13add75": "41837e7c000f84fb000000f3410f1086880000000f2f85f80300000f82e5000000"
   },
-  "version": "0.1.1"
+  "version": "0.2.1",
+  "proximity": {
+    "slot_rva": 58490504,
+    "record_id": 259,
+    "record_size": 272,
+    "identity_hex": "030100002884e4c00dc397226952cdf1f5c84b7d5898656a",
+    "original_sha256": "9F5904318CFC34E6866DC1C690141DBBE41C416D37F9EB6658C6FDABBFD6A4AD",
+    "patched_sha256": "6D7044165CB773593410D58B55FA0E2E511D3AB70E946E508C32C1718757DF8F",
+    "edits": [
+      {
+        "offset": 136,
+        "before": "00007042",
+        "after": "0000b443",
+        "field": "detonation_angle"
+      },
+      {
+        "offset": 148,
+        "before": "00000000",
+        "after": "00000040",
+        "field": "proximity_radius"
+      },
+      {
+        "offset": 152,
+        "before": "00000000",
+        "after": "cdcc4c3e",
+        "field": "trigger_delay"
+      },
+      {
+        "offset": 156,
+        "before": "00000000",
+        "after": "3c010000",
+        "field": "expiry_incendiary_payload"
+      },
+      {
+        "offset": 160,
+        "before": "00000000",
+        "after": "0000803f",
+        "field": "arming_distance"
+      },
+      {
+        "offset": 248,
+        "before": "18953d39",
+        "after": "d8e996ab",
+        "field": "proximity_query_filter"
+      }
+    ],
+    "radius_metres": 2,
+    "delay_seconds": 0.2,
+    "arming_metres": 1,
+    "incendiary_explosion_id": 316,
+    "detonation_angle_degrees": 360,
+    "proximity_query_filter_hex": "d8e996ab"
+  }
 }

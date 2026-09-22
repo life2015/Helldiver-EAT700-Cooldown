@@ -1,4 +1,4 @@
-return function(create_api,controller,profile,cooldown)
+return function(create_api,controller,profile,cooldown,proximity)
     if rawget(_G,'EAT700Cooldown') then return rawget(_G,'EAT700Cooldown')end
     local state={version=profile.version,status='starting'}
     rawset(_G,'EAT700Cooldown',state)
@@ -10,10 +10,10 @@ return function(create_api,controller,profile,cooldown)
             local dir=os.getenv('LOCALAPPDATA');if not dir then return end
             local f=io.open(dir..'/EAT700Cooldown.log','w');if not f then return end
             f:write('EAT-700 Cooldown '..profile.version..'\n')
-            for _,key in ipairs({'status','process_id','game_sha256','exe_sha256','base_cooldown','effective_cooldown','error','restored'})do
+            for _,key in ipairs({'status','process_id','game_sha256','exe_sha256','base_cooldown','effective_cooldown','fuse','error','restored'})do
                 f:write(key..'='..tostring(state[key] or '')..'\n')
             end
-            f:write('target=EAT-700\nchange=cooldown_only\n');f:close()
+            f:write('target=EAT-700\nchange=incendiary_proximity_and_cooldown\n');f:close()
         end)
     end
     local function stop(reason)
@@ -35,7 +35,7 @@ return function(create_api,controller,profile,cooldown)
             assert(api.read(base+tonumber(offset),#signature)==signature,'Native layout mismatch')
         end
         assert(type(update)=='function','Game update unavailable')
-        control=controller(api,profile,base,state,cooldown)
+        control=controller(api,profile,base,state,cooldown,proximity)
     end)
     if not ok then stop(why);return state end
     local original,previous_shutdown=update,shutdown
